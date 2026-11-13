@@ -6,7 +6,7 @@
 // class Circle 
 class Circle : public Shape {
 public: 
-    Circle(Point center, std::string name, int radius;
+    Circle(Point center, std::string name, int radius);
 
     double area() const override;
     void draw(std::ostream& out) const override;
