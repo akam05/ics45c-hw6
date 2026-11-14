@@ -43,3 +43,66 @@ TEST(PictureTests, TotalArea) {
     p.add(s);
     EXPECT_NEAR(p.total_area(), 98.039816, 0.01);
 }
+
+TEST(PictureTests, PrintAll)
+{
+    Picture p;
+    Triangle t({0, 0}, "T", 1, 1);
+    Circle c({0, 0}, "C", 1);
+    Square s({0, 0}, "S", 1);
+    p.add(t);
+    p.add(c);
+    p.add(s);
+
+    std::stringstream out;
+    p.print_all(out);
+    
+    EXPECT_STREQ(out.str().c_str(),
+
+
+
+                         "T at (0, 0) area = 0.5\n"
+                 "*\n"
+                         "C at (0, 0) area = 3.14159\n"
+                 " * \n"
+                 " * \n"
+                        "S at (0, 0) area = 1\n"
+                 "*\n");
+}
+
+TEST(PictureTests, DrawAll)
+{
+    Picture p;
+    Triangle t({0, 0}, "T", 1, 1);
+    Circle c({0, 0}, "C", 1);
+    Square s({0, 0}, "S", 1);
+    p.add(t);
+    p.add(c);
+    p.add(s);
+
+    std::stringstream out;
+    p.draw_all(out);
+    
+    EXPECT_STREQ(out.str().c_str(),
+                 "*\n"
+                 " * \n"
+                 " * \n"
+                 "*\n");
+}
+
+TEST(PictureTests, Copy)
+{
+    Picture p;
+    Square s({0,0}, "S", 1);
+    p.add(s);
+    Picture copy(p);
+    
+    std::stringstream p_out;
+    std::stringstream copy_out;
+    
+    p.draw_all(p_out);
+    copy.draw_all(copy_out);
+
+    EXPECT_EQ(p.total_area(), copy.total_area());
+    EXPECT_EQ(p_out.str(), copy_out.str());   
+}
