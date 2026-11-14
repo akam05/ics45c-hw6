@@ -14,9 +14,9 @@ Picture(const Picture& other) : Picture()
         add(*p->shape);
     }
 }
-Picture(Picture&& other)
+Picture(Picture&& other) : Picture() // head(nullptr), tail(nullptr)
 {
-    
+    swap(other);
 }
 
 // swap this Picture's list with other Picture's list
@@ -29,10 +29,21 @@ void swap(Picture& other)
 // copy and move assignment for Picture (good C++ practice)
 Picture& operator=(const Picture& other)
 {
-    
+    if (this != & other)
+    {
+        Picture temp(other);
+        swap(temp);
+    }
+    return *this;
 }
+
 Picture& operator=(Picture&& other)
 {
+    if (this != &other)
+    {
+        swap(other);
+    }
+    return *this;
 }
 
 // adds a clone of shape to the end of this Picture's linked list.
