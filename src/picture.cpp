@@ -86,6 +86,7 @@ double Picture::total_area() const
     for (ListNode* temp = head; temp != nullptr; temp = temp->next) {
         total = total + temp->shape->area();
     }
+    return total;
 }
 
 // frees all storage owned by this Picture when it dies
