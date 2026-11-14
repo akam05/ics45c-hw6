@@ -11,7 +11,7 @@ double Triangle::area() const
     return base * height / 2.0;
 }
 
-void draw(std::ostream& out) const
+void Triangle::draw(std::ostream& out) const
 {
     int offset = std::max(height, base);
 
@@ -22,11 +22,11 @@ void draw(std::ostream& out) const
         for (int k = 0; k <= i; ++k) {
             out << '*';
         }
-        out << '\n'
+        out << '\n';
     }
 }
 
-Triangle* Triangle::clone()
+Triangle* Triangle::clone() const
 {
     return new Triangle{*this};
 }
