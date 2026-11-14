@@ -10,7 +10,9 @@ Picture::Picture() : head(nullptr), tail(nullptr)
 // copy and move constructors for Picture (good C++ practice)
 Picture(const Picture& other) : Picture()
 {
-    for (ListNode* p = other.head;
+    for (ListNode* p = other.head; p != nullptr; p = p->next)
+        {
+            
 }
 Picture(Picture&& other)
 {
@@ -36,6 +38,14 @@ Picture& operator=(Picture&& other)
 // when this Picture object dies.
 void add(const Shape& shape)
 {
+    ListNode* node = new ListNode{shape.clone(), nullptr};
+    if (head == nullptr)
+    {
+        head = node;
+    } else {
+        tail->next = node;
+    }
+    tail = node;
 }
 
 // calls method print() on each shape in the order they were added
