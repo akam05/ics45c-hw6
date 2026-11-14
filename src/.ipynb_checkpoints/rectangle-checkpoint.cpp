@@ -1,12 +1,26 @@
 #include "rectangle.hpp"
 #include <iostream>
 
-#include "rectangle.hpp"
-
-class Square : public Rectangle {
-public:
-    Square(Point center, std::string name, int side);
+Rectangle::Rectangle(Point center, std::string name, int width, int height) : Shape(center, name), width(width), height(height)
+{
 }
 
-#endif
+double Rectangle::area() const 
+{
+    return static_cast<double>(width) * height;
+}
 
+void Rectangle::draw(std::ostream& out) const
+{
+    for (int i = 0; i < height; i += 2) {
+        for (int j = 0; j < width; ++j) {
+            out << '+';
+        }
+    }
+    out << '\n';
+}
+
+Rectangle* Rectangle::clone() const
+{
+    return new Rectangle{*this};
+}

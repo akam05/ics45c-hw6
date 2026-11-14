@@ -3,9 +3,7 @@
 #ifndef RECTANGLE_HPP
 #define RECTANGLE_HPP
 // class Rectangle
-
-// class Circle 
-class Circle : public Shape {
+class Rectangle : public Shape {
 public: 
     Rectangle(Point center, std::string name, int width, int height);
 
@@ -13,7 +11,7 @@ public:
     void draw(std::ostream& out) const override;
     Rectangle* clone() const override;
 protected:
-    Rectangle(const Circle& other) = default;
+    Rectangle(const Rectangle& other) = default;
 private:
     int width;
     int height;
