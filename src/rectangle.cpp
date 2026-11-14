@@ -16,8 +16,8 @@ void Rectangle::draw(std::ostream& out) const
         for (int j = 0; j < width; ++j) {
             out << '+';
         }
+        out << '\n';
     }
-    out << '\n';
 }
 
 Rectangle* Rectangle::clone() const
