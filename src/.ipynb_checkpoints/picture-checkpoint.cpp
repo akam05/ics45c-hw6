@@ -14,7 +14,7 @@ Picture(const Picture& other) : Picture()
         add(*p->shape);
     }
 }
-Picture(Picture&& other) : Picture() // head(nullptr), tail(nullptr)
+Picture(Picture&& other) : Picture() // head(nullptr), tail(nullptr) - empty list
 {
     swap(other);
 }
