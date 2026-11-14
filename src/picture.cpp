@@ -10,8 +10,9 @@ Picture::Picture() : head(nullptr), tail(nullptr)
 // copy and move constructors for Picture (good C++ practice)
 Picture(const Picture& other) : Picture()
 {
-    for (ListNode* p = other.head; p != nullptr; p = p->next)
-        {
+    for (ListNode* p = other.head; p != nullptr; p = p->next) {
+        
+    }
             
 }
 Picture(Picture&& other)
@@ -21,6 +22,8 @@ Picture(Picture&& other)
 // swap this Picture's list with other Picture's list
 void swap(Picture& other)
 {
+    std::swap(head, other.head);
+    std::swap(tail, other.tail);
 }
 
 // copy and move assignment for Picture (good C++ practice)
@@ -51,19 +54,38 @@ void add(const Shape& shape)
 // calls method print() on each shape in the order they were added
 void print_all(std::ostream& out) const
 {
+    for (ListNode* temp = head; temp != nullptr; temp = temp->next) {
+        head->shape->print(out);
+    }
 }
 
 // draws the Shapes in this Picture in the order they were added
 void draw_all(std::ostream& out) const
 {
+    for (ListNode* tempp = head; temp != nullptr; temp = temp->next) {
+        head->shape->print(out);
+    }
 }
 
 // returns the sum of the areas of all the Shapes in this Picture
 double total_area() const
 {
+    double total;
+    for (ListNode* temp = head; temp != nullptr; temp = temp->next) {
+        total = total + head->shape->area();
+    }
 }
 
 // frees all storage owned by this Picture when it dies
 ~Picture()
 {
+    if (head != nullptr) {
+        ListNode* temp = head->next;
+        while (head != nullptr) {
+            delete head->shape;
+            delete head;
+            head = temp;
+            temp = head->next;
+        }
+    }
 }
