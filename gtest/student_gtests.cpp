@@ -27,3 +27,19 @@ TEST(PictureTests, AnEmptyPictureHasNoArea) {
 }
 
 // ADD YOUR TESTS HERE:
+TEST(ShapeTests, AreaTests) {
+    EXPECT_NEAR(Triangle({0, 0}, "T", 7, 3).area(), 10.5, 0.001);
+    EXPECT_NEAR(Circle({0, 0}, "C", 5).area(), 78.539816, 0.001);
+    EXPECT_NEAR(Square({0, 0}, "S", 3).area(), 9, 0.001);
+}
+
+TEST(PictureTests, TotalArea) {
+    Picture p;
+    Triangle t({0, 0}, "T", 7, 3);
+    Circle c({0, 0}, "C", 5);
+    Square s({0, 0}, "S", 3);
+    p.add(t);
+    p.add(c);
+    p.add(s);
+    EXPECT_NEAR(p.total_area(), 98.039816, 0.01);
+}
