@@ -8,26 +8,26 @@ Picture::Picture() : head(nullptr), tail(nullptr)
 }
 
 // copy and move constructors for Picture (good C++ practice)
-Picture(const Picture& other) : Picture()
+Picture::Picture(const Picture& other) : Picture()
 {
     for (ListNode* p = other.head; p != nullptr; p = p->next) {
         add(*p->shape);
     }
 }
-Picture(Picture&& other) : Picture() // head(nullptr), tail(nullptr) - empty list
+Picture::Picture(Picture&& other) : Picture() // head(nullptr), tail(nullptr) - empty list
 {
     swap(other);
 }
 
 // swap this Picture's list with other Picture's list
-void swap(Picture& other)
+void Picture::swap(Picture& other)
 {
     std::swap(head, other.head);
     std::swap(tail, other.tail);
 }
 
 // copy and move assignment for Picture (good C++ practice)
-Picture& operator=(const Picture& other)
+Picture& Picture::operator=(const Picture& other)
 {
     if (this != & other)
     {
@@ -37,7 +37,7 @@ Picture& operator=(const Picture& other)
     return *this;
 }
 
-Picture& operator=(Picture&& other)
+Picture& Picture::operator=(Picture&& other)
 {
     if (this != &other)
     {
@@ -51,7 +51,7 @@ Picture& operator=(Picture&& other)
 // while Picture can own the newly created shape objects contained within
 // it. Note this means Picture is responsible for deleting these clones
 // when this Picture object dies.
-void add(const Shape& shape)
+void Picture::add(const Shape& shape)
 {
     ListNode* node = new ListNode{shape.clone(), nullptr};
     if (head == nullptr)
@@ -64,32 +64,32 @@ void add(const Shape& shape)
 }
 
 // calls method print() on each shape in the order they were added
-void print_all(std::ostream& out) const
+void Picture::print_all(std::ostream& out) const
 {
     for (ListNode* temp = head; temp != nullptr; temp = temp->next) {
-        head->shape->print(out);
+        temp->shape->print(out);
     }
 }
 
 // draws the Shapes in this Picture in the order they were added
-void draw_all(std::ostream& out) const
+void Picture::draw_all(std::ostream& out) const
 {
-    for (ListNode* tempp = head; temp != nullptr; temp = temp->next) {
-        head->shape->print(out);
+    for (ListNode* temp = head; temp != nullptr; temp = temp->next) {
+        temp->shape->draw(out);
     }
 }
 
 // returns the sum of the areas of all the Shapes in this Picture
-double total_area() const
+double Picture::total_area() const
 {
-    double total;
+    double total = 0.0;
     for (ListNode* temp = head; temp != nullptr; temp = temp->next) {
-        total = total + head->shape->area();
+        total = total + temp->shape->area();
     }
 }
 
 // frees all storage owned by this Picture when it dies
-~Picture()
+Picture::~Picture()
 { 
     while (head != nullptr) {
         ListNode* temp = head->next;
