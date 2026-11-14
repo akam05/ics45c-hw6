@@ -11,12 +11,12 @@ Picture::Picture() : head(nullptr), tail(nullptr)
 Picture(const Picture& other) : Picture()
 {
     for (ListNode* p = other.head; p != nullptr; p = p->next) {
-        
+        add(*p->shape);
     }
-            
 }
 Picture(Picture&& other)
 {
+    
 }
 
 // swap this Picture's list with other Picture's list
@@ -29,6 +29,7 @@ void swap(Picture& other)
 // copy and move assignment for Picture (good C++ practice)
 Picture& operator=(const Picture& other)
 {
+    
 }
 Picture& operator=(Picture&& other)
 {
@@ -78,14 +79,11 @@ double total_area() const
 
 // frees all storage owned by this Picture when it dies
 ~Picture()
-{
-    if (head != nullptr) {
+{ 
+    while (head != nullptr) {
         ListNode* temp = head->next;
-        while (head != nullptr) {
-            delete head->shape;
-            delete head;
-            head = temp;
-            temp = head->next;
-        }
+        delete head->shape;
+        delete head;
+        head = temp;
     }
 }
